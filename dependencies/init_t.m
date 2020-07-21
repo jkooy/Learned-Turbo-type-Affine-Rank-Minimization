@@ -1,0 +1,19 @@
+function t = init_t(X,eta,b,A,At)
+U = X.U;
+V = X.V;
+Sig = X.Sig;
+M = eta.M;
+Up = eta.Up;
+Vp = eta.Vp;
+tmp = [U*M+Up U]*[V Vp]';
+N = At(A(tmp));
+% Ru = R.U;
+% Rm = R.M;
+% Rv = R.V;
+% Rup = R.Up;
+% Rvp = R.Vp;
+% Rx = Ru*Rm*Rv'+Rup*Rv'+Ru*Rvp';
+Xm = U*Sig*V';
+R = At(b-A(Xm));
+t = trace(N'*R)/trace(N'*N);
+end
